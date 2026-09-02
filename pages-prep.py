@@ -1,20 +1,21 @@
 from pathlib import Path
 import base64
-import re
 
 ROOT = Path(".")
 LT = chr(60)
 GT = chr(62)
+DQ = chr(34)
 
 
 def script_tag(src):
-    return "  " + LT + "script src=" + chr(34) + src + chr(34) + GT + LT + "/script" + GT
+    return "  " + LT + "script src=" + DQ + src + DQ + GT + LT + "/script" + GT
 
 
 def extract_b64(text):
-    m = re.search(r"'([^']*)'", text)
-    if m:
-        return m.group(1)
+    start = text.find(DQ)
+    end = text.rfind(DQ)
+    if start >= 0 and end > start:
+        return text[start + 1 : end]
     return ""
 
 
