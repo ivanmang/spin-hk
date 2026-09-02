@@ -5,6 +5,7 @@ ROOT = Path(".")
 LT = chr(60)
 GT = chr(62)
 DQ = chr(34)
+SQ = chr(39)
 
 
 def script_tag(src):
@@ -12,11 +13,15 @@ def script_tag(src):
 
 
 def extract_b64(text):
-    start = text.find(DQ)
-    end = text.rfind(DQ)
-    if start >= 0 and end > start:
-        return text[start + 1 : end]
-    return ""
+    best = ""
+    for q in (DQ, SQ):
+        start = text.find(q)
+        end = text.rfind(q)
+        if start >= 0 and end > start:
+            piece = text[start + 1 : end]
+            if len(piece) > len(best):
+                best = piece
+    return best
 
 
 def assemble(prefix, count):
@@ -37,7 +42,13 @@ def assemble(prefix, count):
 
 data_src = assemble("d", 4)
 app_src = assemble("a", 4)
-assembled = bool(data_src and app_src and "SPIN_DATA" in data_src and "COPY" in app_src)
+assembled = bool(
+    data_src
+    and app_src
+    and "SPIN_DATA" in data_src
+    and "COPY" in app_src
+    and "moveTo" in app_src
+)
 
 if assembled:
     Path("data.js").write_text(data_src if data_src.endswith("\n") else data_src + "\n")
@@ -68,13 +79,31 @@ for line in lines:
         if "script src" in line:
             continue
         if body_close in line:
-            out.append(script_tag("data.js?v=15"))
-            out.append(script_tag("app.js?v=15"))
-        line = line.replace("?v=9", "?v=15")
+            out.append(script_tag("data.js?v=16"))
+            out.append(script_tag("app.js?v=16"))
+        line = line.replace("?v=9", "?v=16")
+        line = line.replace("?v=14", "?v=16")
+        line = line.replace("?v=15", "?v=16")
     else:
-        line = line.replace("?v=9", "?v=14")
+        line = line.replace("?v=9", "?v=16")
+        line = line.replace("?v=14", "?v=16")
+        line = line.replace("?v=15", "?v=16")
     out.append(line)
 
 Path("index.html").write_text("\n".join(out) + "\n")
-Path("data-c.js").write_text("var DATA=window.SPIN_DATA;\n")
+Path("data-c.js").write_text(
+    "var DATA=window.SPIN_DATA||{};\n"
+    "if(!DATA.presets){\n"
+    "DATA.presets={eat:["
+    '{l:"\\u8336\\u9910\\u5ef3",e:"\\u2615"},'
+    '{l:"\\u5169\\u991e\\u98ef",e:"\\ud83c\\udf71"},'
+    '{l:"\\u8b5a\\u4ed4",e:"\\ud83c\\udf5c"},'
+    '{l:"\\u706b\\u934b",e:"\\ud83c\\udf72"},'
+    '{l:"\\u97d3\\u71d2",e:"\\ud83e\\udd69"},'
+    '{l:"\\u6cf0\\u83dc",e:"\\ud83c\\udf36"},'
+    '{l:"\\u58fd\\u53f8",e:"\\ud83c\\udf63"},'
+    '{l:"\\u9ea5\\u7576\\u52de",e:"\\ud83c\\udf54"}'
+    "]};\n"
+    "}\n"
+)
 print("patched index", len(out), "assembled", assembled)
