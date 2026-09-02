@@ -1,1 +1,1 @@
-window.SPIN_DATA=window.SPIN_DATA||{};
+var DATA=window.SPIN_DATA;
