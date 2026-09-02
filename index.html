@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>&#x8F49;&#x4E00;&#x8F49;</title>
-  <meta name="description" content="&#x9999;&#x6E2F;&#x8F49;&#x76E4;&#xFF1A;&#x4ECA;&#x665A;&#x98DF;&#x8336;&#x8A18;&#x5B9A;&#x8B5A;&#x4ED4;&#x3001;WFH &#x5B9A;&#x8FD4;&#x5DE5;&#xFF0C;&#x8F49;&#x4E00;&#x4E0B;&#x5C31;&#x5F97;&#x3002" />
+  <meta name="description" content="&#x9999;&#x6E2F;&#x8F49;&#x76E4;&#xFF1A;&#x4ECA;&#x665A;&#x8336;&#x8A18;&#x6216;&#x8B5A;&#x4ED4;&#x3001;&#x5728;&#x5BB6;&#x5DE5;&#x4F5C;&#x6216;&#x8FD4;&#x516C;&#x53F8;&#xFF0C;&#x8F49;&#x4E00;&#x4E0B;&#x5373;&#x53EF;&#x6C7A;&#x5B9A;&#x3002;" />
   <meta name="theme-color" content="#0a0a0b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,6 +76,16 @@
     .card.left .actions{justify-content:flex-end}
     .outline{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:transparent;color:var(--fg);box-shadow:var(--shadow);font:500 .875rem "Noto Sans TC",sans-serif}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:30}
+
+    .ai-box{margin:0 0 1rem;padding:.75rem;border-radius:1rem;background:var(--bg);box-shadow:var(--shadow)}
+    .ai-row{display:flex;gap:.5rem;min-width:0}
+    .ai-row input{flex:1;min-width:0}
+    .ai-ex{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+    .ai-ex button{height:32px;padding:0 .75rem;font-size:.75rem;border:0;border-radius:999px;background:transparent;color:var(--muted);box-shadow:var(--shadow)}
+    .ai-ex button:hover{color:var(--fg)}
+    .ai-ex button:disabled,.ai-row button:disabled,.ai-row input:disabled{opacity:.4}
+    .ai-msg{margin-top:.5rem;font-size:.8rem;color:var(--muted)}
+    .ai-msg.err{color:var(--danger)}
     @media (max-width:920px){.layout{grid-template-columns:1fr}.app{padding:1.25rem 1rem}}
   </style>
 </head>
@@ -84,7 +94,7 @@
     <header>
       <div>
         <div class="brand">&#x8F49;&#x4E00;&#x8F49;</div>
-        <p class="sub">&#x9999;&#x6E2F;&#x4EBA;&#x5605;&#x6C7A;&#x5B9A;&#x76E4;&#x3002;</p>
+        <p class="sub">&#x9999;&#x6E2F;&#x4EBA;&#x7684;&#x6C7A;&#x5B9A;&#x8F49;&#x76E4;&#x3002;</p>
       </div>
       <div class="icon-row">
         <button class="icon-btn" id="soundBtn" title="&#x8072;&#x97F3;">&#x8072;</button>
@@ -101,7 +111,7 @@
           <canvas id="wheel" width="840" height="840"></canvas>
         </div>
         <button class="spin" id="spinBtn">&#x8F49;&#x76E4;</button>
-        <p class="hint">&#x7A7A;&#x767D;&#x9375;&#x90FD;&#x53EF;&#x4EE5;&#x8F49; &#xB7; &#x6700;&#x5C11;&#x5169;&#x500B;&#x9078;&#x9805;</p>
+        <p class="hint">&#x7A7A;&#x767D;&#x9375;&#x4EA6;&#x53EF;&#x8F49;&#x52D5; &#xB7; &#x81F3;&#x5C11;&#x5169;&#x500B;&#x9078;&#x9805;</p>
       </section>
       <aside class="panel">
         <div class="theme">
@@ -110,26 +120,36 @@
             <p id="themeLabel">&#x4ECA;&#x665A;&#x98DF;&#x54A9; &#xB7; 8 &#x500B;&#x9078;&#x9805;</p>
           </div>
           <div class="tools">
-            <button class="icon-btn" id="saveBtn" title="&#x5132;&#x5B58;&#x5462;&#x500B;&#x76E4;">&#x5B58;</button>
+            <button class="icon-btn" id="saveBtn" title="&#x5132;&#x5B58;&#x6B64;&#x8F49;&#x76E4;">&#x5B58;</button>
             <button class="icon-btn" id="randBtn" title="&#x96A8;&#x6A5F;&#x4E3B;&#x984C;">&#x9AB0;</button>
             <button class="icon-btn" id="shuffleBtn" title="&#x6D17;&#x724C;">&#x6D17;</button>
           </div>
         </div>
+
+        <div class="ai-box">
+          <p class="kicker">AI &#x7522;&#x751F;&#x9078;&#x9805;</p>
+          <form id="aiForm" class="ai-row">
+            <input id="aiPrompt" type="text" maxlength="80" autocomplete="off" enterkeyhint="go" placeholder="&#x8F38;&#x5165;&#x63D0;&#x793A;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x4ECA;&#x665A;&#x65FA;&#x89D2;&#x98DF;&#x751A;&#x9EBC;" aria-label="&#x7522;&#x751F;&#x9078;&#x9805;&#x7684;&#x63D0;&#x793A;" />
+            <button class="add-btn" id="aiBtn" type="submit">&#x7522;&#x751F;</button>
+          </form>
+          <div class="ai-ex" id="aiExamples"></div>
+          <p class="ai-msg" id="aiMsg" hidden></p>
+        </div>
         <div class="tabs" id="tabs"></div>
         <div class="chips" id="chips"></div>
         <div class="add">
-          <input id="newOption" type="text" maxlength="42" placeholder="&#x52A0;&#x500B;&#x9078;&#x9805;" />
+          <input id="newOption" type="text" maxlength="42" placeholder="&#x65B0;&#x589E;&#x9078;&#x9805;" />
           <button class="add-btn" id="addBtn">&#x52A0;&#x5165;</button>
         </div>
         <ul class="options" id="options"></ul>
         <div class="hr"></div>
-        <label class="row">&#x8F49;&#x5B8C;&#x522A;&#x8D70;&#x5462;&#x500B; <div class="switch" id="elimSwitch"><i></i></div></label>
-        <label class="row">&#x52A0;&#x5927;&#x683C;&#x6A5F;&#x6703;&#x9AD8;&#x5572; <div class="switch" id="weightSwitch"><i></i></div></label>
-        <p class="hint" id="weightHint" style="display:none">&#x6578;&#x5B57;&#x6108;&#x5927;&#xFF0C;&#x8F49;&#x4E2D;&#x6A5F;&#x6703;&#x6108;&#x9AD8;&#x3002;</p>
+        <label class="row">&#x8F49;&#x5B8C;&#x522A;&#x9664;&#x6B64;&#x9805; <div class="switch" id="elimSwitch"><i></i></div></label>
+        <label class="row">&#x52A0;&#x6B0A;&#x63D0;&#x9AD8;&#x4E2D;&#x734E;&#x6A5F;&#x6703; <div class="switch" id="weightSwitch"><i></i></div></label>
+        <p class="hint" id="weightHint" style="display:none">&#x6578;&#x5B57;&#x8D8A;&#x5927;&#xFF0C;&#x4E2D;&#x734E;&#x6A5F;&#x6703;&#x8D8A;&#x9AD8;&#x3002;</p>
         <div class="hr"></div>
         <div class="hist-head">
           <p class="kicker">&#x6700;&#x8FD1;</p>
-          <button class="link" id="clearHistory" type="button">&#x6E05;&#x7A7A;&#x7D00;&#x9304;</button>
+          <button class="link" id="clearHistory" type="button">&#x6E05;&#x7A7A;&#x8A18;&#x9304;</button>
         </div>
         <ul class="history" id="history"></ul>
       </aside>
@@ -138,9 +158,9 @@
   <div class="modal" id="modal">
     <div class="card">
       <p class="win-emoji emoji" id="winnerEmoji">&#x2728;</p>
-      <p class="kicker">&#x8F49;&#x76E4;&#x63C0;&#x5497;</p>
+      <p class="kicker">&#x8F49;&#x76E4;&#x7D50;&#x679C;</p>
       <h3 id="winnerTitle">&#x2014;</h3>
-      <p class="sub">&#x807D;&#x547D;&#x904B;&#x8B1B;&#x3002;&#x60F3;&#x518D;&#x8F49;&#x5C31;&#x518D;&#x8F49;&#x4E00;&#x6B21;&#x3002;</p>
+      <p class="sub">&#x5DF2;&#x62BD;&#x51FA;&#x7D50;&#x679C;&#x3002;&#x53EF;&#x518D;&#x8F49;&#x4E00;&#x6B21;&#x3002;</p>
       <div class="actions">
         <button class="spin" id="againBtn" style="width:auto;padding:0 1.25rem;margin:0">&#x518D;&#x8F49;&#x4E00;&#x6B21;</button>
         <button class="outline" id="closeModal">&#x95DC;&#x9589;</button>
@@ -149,10 +169,10 @@
   </div>
   <div class="modal" id="saveModal">
     <div class="card left">
-      <p class="kicker">&#x81EA;&#x8A02;&#x76E4;</p>
-      <h3 style="font-size:1.5rem">&#x5132;&#x5B58;&#x5462;&#x500B;&#x76E4;</h3>
-      <p class="sub" style="margin-bottom:1rem">&#x4E4B;&#x5F8C;&#x55BA;&#x300C;&#x81EA;&#x8A02;&#x300D;&#x96A8;&#x6642;&#x64B3;&#x8FD4;&#x3002;</p>
-      <input id="saveName" type="text" maxlength="20" placeholder="&#x76E4;&#x540D;" />
+      <p class="kicker">&#x81EA;&#x8A02;&#x8F49;&#x76E4;</p>
+      <h3 style="font-size:1.5rem">&#x5132;&#x5B58;&#x6B64;&#x8F49;&#x76E4;</h3>
+      <p class="sub" style="margin-bottom:1rem">&#x4E4B;&#x5F8C;&#x53EF;&#x65BC;&#x300C;&#x81EA;&#x8A02;&#x300D;&#x8F09;&#x5165;&#x3002;</p>
+      <input id="saveName" type="text" maxlength="20" placeholder="&#x8F49;&#x76E4;&#x540D;&#x7A31;" />
       <div class="actions">
         <button class="outline" id="cancelSave">&#x53D6;&#x6D88;</button>
         <button class="spin" id="confirmSave" style="width:auto;padding:0 1.25rem;margin:0">&#x5132;&#x5B58;</button>
@@ -160,7 +180,7 @@
     </div>
   </div>
   <canvas id="confetti"></canvas>
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
