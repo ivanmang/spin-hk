@@ -1,44 +1,21 @@
-# &#x8F49;&#x4E00;&#x8F49;
+# 轉一轉 / Spin
 
-&#x9999;&#x6E2F;&#x4EBA;&#x7684;&#x6C7A;&#x5B9A;&#x8F49;&#x76E4;&#x3002;&#x4ECA;&#x665A;&#x5403;&#x751A;&#x9EBC;&#x3001;&#x5728;&#x5BB6;&#x5DE5;&#x4F5C;&#x6216;&#x8FD4;&#x516C;&#x53F8;&#x3001;&#x7D04;&#x6703;&#x53BB;&#x54EA;&#x88E1;&#xFF0C;&#x8F49;&#x4E00;&#x4E0B;&#x5373;&#x53EF;&#x6C7A;&#x5B9A;&#x3002;
+A decision wheel for everyday Hong Kong choices. Switch language with **中 / EN**.
 
-**&#x7DB2;&#x7AD9;:** [https://ivanmang.github.io/spin-hk/](https://ivanmang.github.io/spin-hk/)
+**Live:** https://ivanmang.github.io/spin-hk/
 
-&#x975C;&#x614B;&#x7DB2;&#x9801;&#xFF0C;&#x7121;&#x9700;&#x4F3A;&#x670D;&#x5668;&#x3002;&#x958B;&#x555F;&#x5F8C;&#x53EF;&#x9078;&#x64C7;&#x4E3B;&#x984C;&#x3001;&#x8F38;&#x5165;&#x63D0;&#x793A;&#x7522;&#x751F;&#x9078;&#x9805;&#xFF0C;&#x6216;&#x81EA;&#x884C;&#x65B0;&#x589E;&#x5F8C;&#x8F49;&#x52D5;&#x8F49;&#x76E4;&#x3002;&#x81EA;&#x8A02;&#x8F49;&#x76E4;&#x53EF;&#x5132;&#x5B58;&#x65BC;&#x700F;&#x89BD;&#x5668;&#x3002;
+**English:** https://ivanmang.github.io/spin-hk/?lang=en
 
-## &#x7522;&#x751F;&#x9078;&#x9805;
+Toolbar buttons use icons (help, sound, share, fullscreen) instead of 聲 / 連 / 全.
 
-&#x65BC;&#x300C;&#x7522;&#x751F;&#x9078;&#x9805;&#x300D;&#x8F38;&#x5165;&#x4E00;&#x53E5;&#x63D0;&#x793A;&#xFF0C;&#x4F8B;&#x5982;&#x300C;&#x4ECA;&#x665A;&#x65FA;&#x89D2;&#x98DF;&#x751A;&#x9EBC;&#x300D;&#xFF0C;&#x5373;&#x53EF;&#x63DB;&#x6210;&#x4E00;&#x7D44;&#x672C;&#x5730;&#x9078;&#x9805;&#x3002;&#x672C;&#x7AD9;&#x70BA;&#x975C;&#x614B;&#x9801;&#x9762;&#xFF0C;&#x4F7F;&#x7528;&#x5167;&#x5EFA;&#x984C;&#x5EAB;&#x914D;&#x5C0D;&#xFF0C;&#x7121;&#x9700;&#x96F2;&#x7AEF;&#x670D;&#x52D9;&#x3002;
+Static page, no server required. Pick a theme, type a prompt, or add your own options, then spin.
 
-## &#x4E3B;&#x984C;
+## How to use
 
-### &#x63A8;&#x4ECB;
-&#x4ECA;&#x665A;&#x98DF;&#x54A9; &#xB7; &#x9031;&#x672B;&#x53BB;&#x908A; &#xB7; &#x5317;&#x4E0A;&#x505A;&#x54A9; &#xB7; WFH &#x5B9A;&#x8FD4;&#x5DE5; &#xB7; &#x52A0;&#x73ED;&#x5B9A;&#x6E96;&#x6642;&#x8D70; &#xB7; &#x62CD;&#x62D6;&#x53BB;&#x908A; &#xB7; &#x4ECA;&#x665A;&#x505A;&#x54A9; &#xB7; &#x597D;&#x5B9A;&#x5514;&#x597D; &#xB7; &#x4ECA;&#x65E5;&#x904B;&#x7A0B;
+- Tap **中 / EN** to switch language. Themes and options follow.
+- Type a short prompt and generate options, or pick a theme.
+- Bookmark saves a custom wheel under Custom.
+- Spin, or press the space bar.
+- Copy the link icon to share the same wheel.
 
-### &#x65E5;&#x5E38;
-&#x4ECA;&#x665A;&#x98DF;&#x54A9; &#xB7; &#x98F2;&#x54A9;&#x597D; &#xB7; &#x65E9;&#x9910;&#xFF0F;&#x5348;&#x9910;&#xFF0F;&#x5BB5;&#x591C; &#xB7; &#x716E;&#x5B9A;&#x53EB; &#xB7; &#x5E7E;&#x591A;&#x751C; &#xB7; &#x5E7E;&#x591A;&#x8FA3; &#xB7; &#x9EDE;&#x8FD4;&#x5C4B;&#x4F01;
-
-### &#x8FD4;&#x5DE5;
-WFH &#x5B9A;&#x8FD4;&#x5DE5; &#xB7; &#x52A0;&#x73ED;&#x5B9A;&#x6E96;&#x6642;&#x8D70; &#xB7; &#x6703;&#x8B70;&#x53BB;&#x5514;&#x53BB; &#xB7; &#x516C;&#x53F8;&#x98EF;&#x5C40;
-
-### &#x51FA;&#x53BB;
-&#x4ECA;&#x665A;&#x53BB;&#x908A; &#xB7; &#x5546;&#x5834;&#x505A;&#x54A9; &#xB7; &#x90CA;&#x5916;&#x505A;&#x54A9; &#xB7; &#x96E8;&#x5929;&#x505A;&#x54A9; &#xB7; &#x5317;&#x4E0A;&#x505A;&#x54A9; &#xB7; &#x5047;&#x671F;&#x53BB;&#x908A;
-
-### &#x5B78;&#x751F;&#xFF0F;&#x62CD;&#x62D6;&#xFF0F;&#x670B;&#x53CB;&#xFF0F;&#x96A8;&#x4FBF;
-&#x653E;&#x5B78;&#x5F8C;&#x3001;&#x8003;&#x5B8C;&#x505A;&#x54A9;&#x3001;&#x908A;&#x500B;&#x8ACB;&#x3001;&#x53BB;&#x908A;&#x5531; K&#x3001;hea&#x665A;&#x3001;&#x751F;&#x65E5;&#x641E;&#x54A9;&#x3001;&#x5E36;&#x906E;&#x672A;&#x7B49;&#x3002;
-
-## &#x7528;&#x6CD5;
-
-- &#x8F38;&#x5165;&#x4E00;&#x53E5;&#x63D0;&#x793A;&#xFF0C;&#x6309;&#x300C;&#x7522;&#x751F;&#x300D;
-- &#x6216;&#x9EDE;&#x9078;&#x4E3B;&#x984C;&#xFF0C;&#x8F09;&#x5165;&#x9810;&#x8A2D;&#x9078;&#x9805;
-- &#x6309;&#x66F8;&#x7C64;&#x5132;&#x5B58;&#x81EA;&#x8A02;&#x8F49;&#x76E4;&#xFF0C;&#x4E4B;&#x5F8C;&#x53EF;&#x65BC;&#x300C;&#x81EA;&#x8A02;&#x300D;&#x8F09;&#x5165;
-- &#x6309;&#x300C;&#x8F49;&#x76E4;&#x300D;&#xFF0C;&#x6216;&#x4F7F;&#x7528;&#x7A7A;&#x767D;&#x9375;
-- &#x8907;&#x88FD;&#x9023;&#x7D50;&#xFF0C;&#x8207;&#x670B;&#x53CB;&#x4F7F;&#x7528;&#x540C;&#x4E00;&#x500B;&#x8F49;&#x76E4;
-- &#x300C;&#x8F49;&#x5B8C;&#x522A;&#x9664;&#x6B64;&#x9805;&#x300D;&#x70BA;&#x6DD8;&#x6C70;&#x6A21;&#x5F0F;
-- &#x300C;&#x52A0;&#x6B0A;&#x63D0;&#x9AD8;&#x4E2D;&#x734E;&#x6A5F;&#x6703;&#x300D;&#x53EF;&#x8ABF;&#x6574;&#x6B0A;&#x91CD;
-
-&#x9078;&#x9805;&#x8207;&#x8A18;&#x9304;&#x5132;&#x5B58;&#x65BC;&#x700F;&#x89BD;&#x5668; localStorage&#xFF0C;&#x4E0D;&#x6703;&#x4E0A;&#x50B3;&#x3002;
-
-## GitHub Pages
-
-&#x63A8;&#x9001;&#x5230; main &#x5F8C;&#xFF0C;GitHub Actions &#x6703;&#x81EA;&#x52D5;&#x90E8;&#x7F72;&#x3002;&#x5982;&#x7DB2;&#x7AD9;&#x986F;&#x793A; 404&#xFF0C;&#x8ACB;&#x5230;&#x5132;&#x5B58;&#x5EAB; Settings &#x2192; Pages &#x2192; Build and deployment&#xFF0C;&#x5C07; Source &#x8A2D;&#x70BA; GitHub Actions&#x3002;
+Options and history stay in this browser. Nothing is uploaded.
