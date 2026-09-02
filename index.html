@@ -3,25 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>轉一轉</title>
-  <meta name="description" content="香港轉盤：今晚食咩、放學後、拍拖去邊，轉一下就得。" />
+  <title>&#x8F49;&#x4E00;&#x8F49;</title>
+  <meta name="description" content="&#x9999;&#x6E2F;&#x8F49;&#x76E4;&#xFF1A;&#x4ECA;&#x665A;&#x98DF;&#x8336;&#x8A18;&#x5B9A;&#x8B5A;&#x4ED4;&#x3001;WFH &#x5B9A;&#x8FD4;&#x5DE5;&#xFF0C;&#x8F49;&#x4E00;&#x4E0B;&#x5C31;&#x5F97;&#x3002" />
   <meta name="theme-color" content="#0a0a0b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet" />
   <style>
     :root { --bg:#0a0a0b; --card:#121214; --fg:#f4f4f5; --muted:#a1a1aa; --border:rgba(255,255,255,.08); --primary:#e8e9ed; --primary-fg:#0a0a0b; --danger:#c45c4a; --shadow:0 0 0 1px var(--border); }
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { min-height:100%; background:radial-gradient(900px 520px at 72% -18%,#141416,transparent 55%),var(--bg); color:var(--fg); font-family:"Noto Sans TC",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-    button:not(:disabled){cursor:pointer}
+    button:not(:disabled),[role="button"]:not(:disabled){cursor:pointer}
+    .emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;line-height:1}
     .app{max-width:72rem;margin:0 auto;padding:2.5rem 1.5rem}
     header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:2rem}
     .brand{font-family:"Instrument Serif",Georgia,serif;font-size:1.85rem;letter-spacing:-.03em}
     .sub{color:var(--muted);font-size:.875rem;margin-top:.25rem}
     .icon-row{display:flex;gap:.35rem}
-    .icon-btn{appearance:none;border:0;background:transparent;color:var(--muted);width:44px;height:44px;border-radius:.5rem;display:grid;place-items:center}
+    .icon-btn{appearance:none;border:0;background:transparent;color:var(--muted);width:44px;height:44px;border-radius:.5rem;display:grid;place-items:center;font-size:.85rem}
     .icon-btn:hover{color:var(--fg);background:rgba(255,255,255,.05)}
-    .layout{display:grid;grid-template-columns:minmax(0,1fr) 22rem;gap:1.5rem;align-items:start}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,24rem);gap:1.5rem;align-items:start}
     .stage,.panel{background:rgb(18 18 20 / .85);border-radius:1.5rem;box-shadow:var(--shadow)}
     .stage{display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem}
     .wheel-wrap{position:relative;width:min(36rem,100%);aspect-ratio:1}
@@ -30,52 +31,65 @@
     .spin{margin-top:2rem;width:min(36rem,100%);height:48px;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 1rem "Noto Sans TC",sans-serif}
     .spin:disabled{opacity:.4;cursor:not-allowed}
     .hint{margin-top:.75rem;font-size:.75rem;color:var(--muted)}
-    .panel{padding:1.25rem}
+    .panel{padding:1.25rem;min-width:0}
     .kicker{font-size:.75rem;letter-spacing:.12em;color:var(--muted);font-weight:500}
-    .add{display:flex;gap:.5rem;margin:1rem 0 .75rem}
+    .theme{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.85rem}
+    .theme p{font-size:.9rem;margin-top:.35rem}
+    .tools{display:flex;gap:.15rem}
+    .add{display:flex;gap:.5rem;margin:1rem 0 .75rem;min-width:0}
     input[type=text],input[type=number]{width:100%;height:44px;border:0;border-radius:.5rem;background:var(--bg);color:var(--fg);padding:0 .9rem;font:400 .95rem "Noto Sans TC",sans-serif;box-shadow:var(--shadow);outline:none}
     .add-btn{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 .875rem "Noto Sans TC",sans-serif;white-space:nowrap}
-    .group{margin-bottom:.85rem}
-    .group p{font-size:.75rem;color:var(--muted);margin-bottom:.4rem}
-    .chips{display:flex;flex-wrap:wrap;gap:.4rem}
-    .chips button{border:0;background:transparent;color:var(--muted);padding:.4rem .75rem;border-radius:999px;box-shadow:var(--shadow);font:400 .75rem "Noto Sans TC",sans-serif}
-    .chips button:hover{color:var(--fg)}
+    .tabs,.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+    .tabs{margin-bottom:.7rem}
+    .tabs button,.chips button,.saved{border:0;background:transparent;color:var(--muted);padding:.45rem .8rem;border-radius:999px;box-shadow:var(--shadow);font:400 .8rem "Noto Sans TC",sans-serif}
+    .tabs button.on{background:var(--primary);color:var(--primary-fg);box-shadow:none}
+    .chips button.on,.saved.on{color:var(--fg);background:rgba(255,255,255,.08)}
+    .saved{display:inline-flex;align-items:center;padding-right:.2rem}
+    .saved button{box-shadow:none;padding:.15rem .35rem}
     .options{list-style:none;display:flex;flex-direction:column;gap:.4rem;max-height:16rem;overflow:auto}
-    .option{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:.6rem;align-items:center;background:var(--bg);border-radius:.75rem;padding:.35rem .65rem;box-shadow:var(--shadow)}
-    .swatch{width:12px;height:12px;border-radius:50%}
+    .option{display:grid;grid-template-columns:6px auto minmax(0,1fr) auto auto;gap:.45rem;align-items:center;background:var(--bg);border-radius:.75rem;padding:.2rem .45rem .2rem 0;box-shadow:var(--shadow);overflow:hidden}
+    .swatch{width:6px;height:100%;min-height:2.4rem}
     .option input.label{height:36px;background:transparent;box-shadow:none;padding:0}
-    .del{width:36px;height:36px;border:0;background:transparent;color:var(--muted);border-radius:.4rem}
-    .del:hover{color:var(--danger)}
+    .weight{width:3rem;text-align:center}
+    .del,.x{width:32px;height:32px;border:0;background:transparent;color:var(--muted);border-radius:.4rem}
+    .del:hover,.x:hover{color:var(--danger)}
     .row{display:flex;justify-content:space-between;align-items:center;gap:.75rem;font-size:.9rem;margin:.7rem 0}
     .hr{height:1px;background:var(--border);margin:1rem 0}
     .switch{width:40px;height:24px;border-radius:999px;background:rgba(255,255,255,.1);position:relative;box-shadow:var(--shadow)}
     .switch.on{background:var(--primary)}
     .switch i{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--fg);transition:left .15s}
     .switch.on i{left:18px;background:var(--primary-fg)}
+    .hist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+    .link{border:0;background:transparent;color:var(--muted);font:400 .75rem "Noto Sans TC",sans-serif}
+    .link:hover{color:var(--danger)}
     .history{list-style:none}
-    .history li{display:flex;justify-content:space-between;gap:.75rem;font-size:.875rem;color:var(--muted);padding:.25rem 0}
+    .history li{display:flex;justify-content:space-between;gap:.75rem;font-size:.875rem;color:var(--muted);padding:.2rem 0;align-items:center}
     .history b{color:var(--fg);font-weight:500}
+    .hist-meta{display:flex;align-items:center;gap:.15rem}
     .modal{position:fixed;inset:0;background:rgb(10 10 11 / .7);display:none;place-items:center;z-index:20;padding:1.25rem}
     .modal.show{display:grid}
     .card{width:min(28rem,100%);background:var(--card);border-radius:1.5rem;padding:2rem;text-align:center;box-shadow:var(--shadow)}
+    .card.left{text-align:left}
     .card h3{font-family:"Instrument Serif","Noto Sans TC",serif;font-size:2.2rem;font-weight:500;margin:.35rem 0 .75rem}
+    .win-emoji{font-size:3.5rem;margin-bottom:.5rem}
     .actions{display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem}
+    .card.left .actions{justify-content:flex-end}
     .outline{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:transparent;color:var(--fg);box-shadow:var(--shadow);font:500 .875rem "Noto Sans TC",sans-serif}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:30}
-    @media (max-width:920px){.layout{grid-template-columns:1fr}}
+    @media (max-width:920px){.layout{grid-template-columns:1fr}.app{padding:1.25rem 1rem}}
   </style>
 </head>
 <body>
   <div class="app">
     <header>
       <div>
-        <div class="brand">轉一轉</div>
-        <p class="sub">香港人嘅決定盤。</p>
+        <div class="brand">&#x8F49;&#x4E00;&#x8F49;</div>
+        <p class="sub">&#x9999;&#x6E2F;&#x4EBA;&#x5605;&#x6C7A;&#x5B9A;&#x76E4;&#x3002;</p>
       </div>
       <div class="icon-row">
-        <button class="icon-btn" id="soundBtn" title="聲音">聲</button>
-        <button class="icon-btn" id="shareBtn" title="複製連結">連</button>
-        <button class="icon-btn" id="fsBtn" title="全畫面">全</button>
+        <button class="icon-btn" id="soundBtn" title="&#x8072;&#x97F3;">&#x8072;</button>
+        <button class="icon-btn" id="shareBtn" title="&#x8907;&#x88FD;&#x9023;&#x7D50;">&#x9023;</button>
+        <button class="icon-btn" id="fsBtn" title="&#x5168;&#x756B;&#x9762;">&#x5168;</button>
       </div>
     </header>
     <div class="layout">
@@ -86,39 +100,67 @@
           </div>
           <canvas id="wheel" width="840" height="840"></canvas>
         </div>
-        <button class="spin" id="spinBtn">轉盤</button>
-        <p class="hint">空白鍵都可以轉 · 最少兩個選項</p>
+        <button class="spin" id="spinBtn">&#x8F49;&#x76E4;</button>
+        <p class="hint">&#x7A7A;&#x767D;&#x9375;&#x90FD;&#x53EF;&#x4EE5;&#x8F49; &#xB7; &#x6700;&#x5C11;&#x5169;&#x500B;&#x9078;&#x9805;</p>
       </section>
       <aside class="panel">
-        <p class="kicker">主題</p>
-        <div class="add">
-          <input id="newOption" type="text" maxlength="42" placeholder="加個選項" />
-          <button class="add-btn" id="addBtn">加入</button>
+        <div class="theme">
+          <div>
+            <p class="kicker">&#x4E3B;&#x984C;</p>
+            <p id="themeLabel">&#x4ECA;&#x665A;&#x98DF;&#x54A9; &#xB7; 8 &#x500B;&#x9078;&#x9805;</p>
+          </div>
+          <div class="tools">
+            <button class="icon-btn" id="saveBtn" title="&#x5132;&#x5B58;&#x5462;&#x500B;&#x76E4;">&#x5B58;</button>
+            <button class="icon-btn" id="randBtn" title="&#x96A8;&#x6A5F;&#x4E3B;&#x984C;">&#x9AB0;</button>
+            <button class="icon-btn" id="shuffleBtn" title="&#x6D17;&#x724C;">&#x6D17;</button>
+          </div>
         </div>
-        <div id="groups"></div>
+        <div class="tabs" id="tabs"></div>
+        <div class="chips" id="chips"></div>
+        <div class="add">
+          <input id="newOption" type="text" maxlength="42" placeholder="&#x52A0;&#x500B;&#x9078;&#x9805;" />
+          <button class="add-btn" id="addBtn">&#x52A0;&#x5165;</button>
+        </div>
         <ul class="options" id="options"></ul>
         <div class="hr"></div>
-        <label class="row">轉完刪走呢個 <div class="switch" id="elimSwitch"><i></i></div></label>
-        <label class="row">加大格機會高啲 <div class="switch" id="weightSwitch"><i></i></div></label>
-        <p class="hint" id="weightHint" style="display:none">數字愈大，轉中機會愈高。</p>
+        <label class="row">&#x8F49;&#x5B8C;&#x522A;&#x8D70;&#x5462;&#x500B; <div class="switch" id="elimSwitch"><i></i></div></label>
+        <label class="row">&#x52A0;&#x5927;&#x683C;&#x6A5F;&#x6703;&#x9AD8;&#x5572; <div class="switch" id="weightSwitch"><i></i></div></label>
+        <p class="hint" id="weightHint" style="display:none">&#x6578;&#x5B57;&#x6108;&#x5927;&#xFF0C;&#x8F49;&#x4E2D;&#x6A5F;&#x6703;&#x6108;&#x9AD8;&#x3002;</p>
         <div class="hr"></div>
-        <p class="kicker">最近</p>
+        <div class="hist-head">
+          <p class="kicker">&#x6700;&#x8FD1;</p>
+          <button class="link" id="clearHistory" type="button">&#x6E05;&#x7A7A;&#x7D00;&#x9304;</button>
+        </div>
         <ul class="history" id="history"></ul>
       </aside>
     </div>
   </div>
   <div class="modal" id="modal">
     <div class="card">
-      <p class="kicker">轉盤擬咋</p>
-      <h3 id="winnerTitle">—</h3>
-      <p class="sub">聽命運講。想再轉就再轉一次。</p>
+      <p class="win-emoji emoji" id="winnerEmoji">&#x2728;</p>
+      <p class="kicker">&#x8F49;&#x76E4;&#x63C0;&#x5497;</p>
+      <h3 id="winnerTitle">&#x2014;</h3>
+      <p class="sub">&#x807D;&#x547D;&#x904B;&#x8B1B;&#x3002;&#x60F3;&#x518D;&#x8F49;&#x5C31;&#x518D;&#x8F49;&#x4E00;&#x6B21;&#x3002;</p>
       <div class="actions">
-        <button class="spin" id="againBtn" style="width:auto;padding:0 1.25rem;margin:0">再轉一次</button>
-        <button class="outline" id="closeModal">關閉</button>
+        <button class="spin" id="againBtn" style="width:auto;padding:0 1.25rem;margin:0">&#x518D;&#x8F49;&#x4E00;&#x6B21;</button>
+        <button class="outline" id="closeModal">&#x95DC;&#x9589;</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="saveModal">
+    <div class="card left">
+      <p class="kicker">&#x81EA;&#x8A02;&#x76E4;</p>
+      <h3 style="font-size:1.5rem">&#x5132;&#x5B58;&#x5462;&#x500B;&#x76E4;</h3>
+      <p class="sub" style="margin-bottom:1rem">&#x4E4B;&#x5F8C;&#x55BA;&#x300C;&#x81EA;&#x8A02;&#x300D;&#x96A8;&#x6642;&#x64B3;&#x8FD4;&#x3002;</p>
+      <input id="saveName" type="text" maxlength="20" placeholder="&#x76E4;&#x540D;" />
+      <div class="actions">
+        <button class="outline" id="cancelSave">&#x53D6;&#x6D88;</button>
+        <button class="spin" id="confirmSave" style="width:auto;padding:0 1.25rem;margin:0">&#x5132;&#x5B58;</button>
       </div>
     </div>
   </div>
   <canvas id="confetti"></canvas>
+  <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
