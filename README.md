@@ -4,7 +4,7 @@
 
 **Live site:** [https://ivanmang.github.io/spin-hk/](https://ivanmang.github.io/spin-hk/)
 
-單檔靜態頁，無需伺服器。開頁、撲主題、轉盤。
+單檔靜態頁，無需伺服器。開頁、撳主題、轉盤。
 
 ## 十個主題
 
@@ -12,15 +12,15 @@
 | 主題 | 選項 |
 | --- | --- |
 | 今晚食咩 | 茶餐廳、車仔麵、火鍋、壽司、麥當勞、腸粉、韓燒、叫外賣 |
-| 飲咩好 | 絲襪奶茶、凍檪茶、咖啡、檪檬可樂、珍珠奶茶、豆漿、清水 |
+| 飲咩好 | 絲襪奶茶、凍檸茶、咖啡、檸檬可樂、珍珠奶茶、豆漿、清水 |
 | 點返屋企 | 港鐵、巴士、小巴、的士、Uber、行路 |
 | 週末去邊 | 行山、去沙灘、行商場、睇戲、留喺屋企、去澳門、行街市、去公園 |
 
 ### 學生
 | 主題 | 選項 |
 | --- | --- |
-| 放學後 | 溫習、打機、去街、補習、打波、睇 YouTube、瞰一陣、食嘢 |
-| 溫書定休息 | 溫書 25 分鐘、休息 10 分鐘、做 past paper、早啲瞰、去飲茶、覆筆記 |
+| 放學後 | 溫習、打機、去街、補習、打波、睇 YouTube、瞓一陣、食嘢 |
+| 溫書定休息 | 溫書 25 分鐘、休息 10 分鐘、做 past paper、早啲瞓、去飲茶、覆筆記 |
 | 邊度溫書 | 圖書館、自修室、屋企、Cafe、麥當勞、同學屋企 |
 
 ### 拍拖
@@ -34,8 +34,8 @@
 
 ## 用法
 
-- 撲右邊主題 chips 載入一套選項
-- 撲「轉盤」，或者空白鍵
+- 撳右邊主題 chips 載入一套選項
+- 撳「轉盤」，或者空白鍵
 - 複製連結，朋友開同一個盤
 - 「轉完刪走呢個」＝淘汰賽
 - 「加大格機會高啲」＝權重
@@ -44,6 +44,10 @@
 
 ## GitHub Pages
 
-Push 去 `main` 之後，Actions 會自動 deploy。
+Repo 已公開。要 live site，去 **Settings → Pages**：
 
-如果網站 404，去 repo **Settings → Pages → Build and deployment**，Source 擬 **GitHub Actions**。
+1. Source 揀 **Deploy from a branch**
+2. Branch：`main` ，Folder：`/ (root)`
+3. Save
+
+幾分鐘後就會出 [https://ivanmang.github.io/spin-hk/](https://ivanmang.github.io/spin-hk/)
