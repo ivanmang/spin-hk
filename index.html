@@ -3,45 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&#x8F49;&#x4E00;&#x8F49;</title>
-  <meta name="description" content="&#x9999;&#x6E2F;&#x8F49;&#x76E4;&#xFF1A;&#x4ECA;&#x665A;&#x8336;&#x8A18;&#x6216;&#x8B5A;&#x4ED4;&#x3001;&#x5728;&#x5BB6;&#x5DE5;&#x4F5C;&#x6216;&#x8FD4;&#x516C;&#x53F8;&#xFF0C;&#x8F49;&#x4E00;&#x4E0B;&#x5373;&#x53EF;&#x6C7A;&#x5B9A;&#x3002;" />
+  <title>Spin</title>
+  <meta name="description" content="A decision wheel for everyday Hong Kong choices." />
   <meta name="theme-color" content="#0a0a0b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet" />
   <style>
     :root { --bg:#0a0a0b; --card:#121214; --fg:#f4f4f5; --muted:#a1a1aa; --border:rgba(255,255,255,.08); --primary:#e8e9ed; --primary-fg:#0a0a0b; --danger:#c45c4a; --shadow:0 0 0 1px var(--border); }
     * { box-sizing:border-box; margin:0; padding:0; }
-    html,body { min-height:100%; background:radial-gradient(900px 520px at 72% -18%,#141416,transparent 55%),var(--bg); color:var(--fg); font-family:"Noto Sans TC",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    html,body { min-height:100%; background:radial-gradient(900px 520px at 72% -18%,#141416,transparent 55%),var(--bg); color:var(--fg); font-family:"Noto Sans TC","Figtree",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    html[lang="en"], html[lang="en"] body { font-family:"Figtree","Noto Sans TC",system-ui,sans-serif; }
     button:not(:disabled),[role="button"]:not(:disabled){cursor:pointer}
     .emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;line-height:1}
     .app{max-width:72rem;margin:0 auto;padding:2.5rem 1.5rem}
     header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:2rem}
     .brand{font-family:"Instrument Serif",Georgia,serif;font-size:1.85rem;letter-spacing:-.03em}
     .sub{color:var(--muted);font-size:.875rem;margin-top:.25rem}
-    .icon-row{display:flex;gap:.35rem}
-    .icon-btn{appearance:none;border:0;background:transparent;color:var(--muted);width:44px;height:44px;border-radius:.5rem;display:grid;place-items:center;font-size:.85rem}
+    .icon-row{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:flex-end;align-items:center}
+    .icon-btn{appearance:none;border:0;background:transparent;color:var(--muted);width:44px;height:44px;border-radius:.5rem;display:grid;place-items:center}
+    .icon-btn svg{width:18px;height:18px;display:block}
     .icon-btn:hover{color:var(--fg);background:rgba(255,255,255,.05)}
+    .icon-btn.off{opacity:.45}
+    .lang{display:inline-flex;height:44px;align-items:center;padding:4px;border-radius:.5rem;box-shadow:var(--shadow)}
+    .lang button{appearance:none;border:0;background:transparent;color:var(--muted);height:36px;min-width:36px;padding:0 10px;border-radius:.4rem;font:500 .75rem "Figtree","Noto Sans TC",sans-serif;letter-spacing:.04em}
+    .lang button.on{background:rgba(255,255,255,.1);color:var(--fg)}
     .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,24rem);gap:1.5rem;align-items:start}
     .stage,.panel{background:rgb(18 18 20 / .85);border-radius:1.5rem;box-shadow:var(--shadow)}
     .stage{display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem}
     .wheel-wrap{position:relative;width:min(36rem,100%);aspect-ratio:1}
     canvas#wheel{width:100%;height:100%;display:block}
     .pointer{position:absolute;top:-4px;left:50%;transform:translateX(-50%);z-index:3}
-    .spin{margin-top:2rem;width:min(36rem,100%);height:48px;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 1rem "Noto Sans TC",sans-serif}
+    .spin{margin-top:2rem;width:min(36rem,100%);height:48px;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 1rem "Figtree","Noto Sans TC",sans-serif}
     .spin:disabled{opacity:.4;cursor:not-allowed}
-    .hint{margin-top:.75rem;font-size:.75rem;color:var(--muted)}
+    .hint{margin-top:.75rem;font-size:.75rem;color:var(--muted);text-align:center;max-width:24rem;line-height:1.5}
     .panel{padding:1.25rem;min-width:0}
     .kicker{font-size:.75rem;letter-spacing:.12em;color:var(--muted);font-weight:500}
     .theme{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;margin-bottom:.85rem}
     .theme p{font-size:.9rem;margin-top:.35rem}
     .tools{display:flex;gap:.15rem}
     .add{display:flex;gap:.5rem;margin:1rem 0 .75rem;min-width:0}
-    input[type=text],input[type=number]{width:100%;height:44px;border:0;border-radius:.5rem;background:var(--bg);color:var(--fg);padding:0 .9rem;font:400 .95rem "Noto Sans TC",sans-serif;box-shadow:var(--shadow);outline:none}
-    .add-btn{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 .875rem "Noto Sans TC",sans-serif;white-space:nowrap}
+    input[type=text],input[type=number]{width:100%;height:44px;border:0;border-radius:.5rem;background:var(--bg);color:var(--fg);padding:0 .9rem;font:400 .95rem "Figtree","Noto Sans TC",sans-serif;box-shadow:var(--shadow);outline:none}
+    .add-btn{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:var(--primary);color:var(--primary-fg);font:600 .875rem "Figtree","Noto Sans TC",sans-serif;white-space:nowrap;display:inline-flex;align-items:center;gap:.4rem}
+    .add-btn svg{width:16px;height:16px}
     .tabs,.chips{display:flex;flex-wrap:wrap;gap:.4rem}
     .tabs{margin-bottom:.7rem}
-    .tabs button,.chips button,.saved{border:0;background:transparent;color:var(--muted);padding:.45rem .8rem;border-radius:999px;box-shadow:var(--shadow);font:400 .8rem "Noto Sans TC",sans-serif}
+    .tabs button,.chips button,.saved{border:0;background:transparent;color:var(--muted);padding:.45rem .8rem;border-radius:999px;box-shadow:var(--shadow);font:400 .8rem "Figtree","Noto Sans TC",sans-serif}
     .tabs button.on{background:var(--primary);color:var(--primary-fg);box-shadow:none}
     .chips button.on,.saved.on{color:var(--fg);background:rgba(255,255,255,.08)}
     .saved{display:inline-flex;align-items:center;padding-right:.2rem}
@@ -55,12 +62,12 @@
     .del:hover,.x:hover{color:var(--danger)}
     .row{display:flex;justify-content:space-between;align-items:center;gap:.75rem;font-size:.9rem;margin:.7rem 0}
     .hr{height:1px;background:var(--border);margin:1rem 0}
-    .switch{width:40px;height:24px;border-radius:999px;background:rgba(255,255,255,.1);position:relative;box-shadow:var(--shadow)}
+    .switch{width:40px;height:24px;border-radius:999px;background:rgba(255,255,255,.1);position:relative;box-shadow:var(--shadow);flex-shrink:0}
     .switch.on{background:var(--primary)}
     .switch i{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:var(--fg);transition:left .15s}
     .switch.on i{left:18px;background:var(--primary-fg)}
     .hist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
-    .link{border:0;background:transparent;color:var(--muted);font:400 .75rem "Noto Sans TC",sans-serif}
+    .link{border:0;background:transparent;color:var(--muted);font:400 .75rem "Figtree","Noto Sans TC",sans-serif}
     .link:hover{color:var(--danger)}
     .history{list-style:none}
     .history li{display:flex;justify-content:space-between;gap:.75rem;font-size:.875rem;color:var(--muted);padding:.2rem 0;align-items:center}
@@ -72,11 +79,10 @@
     .card.left{text-align:left}
     .card h3{font-family:"Instrument Serif","Noto Sans TC",serif;font-size:2.2rem;font-weight:500;margin:.35rem 0 .75rem}
     .win-emoji{font-size:3.5rem;margin-bottom:.5rem}
-    .actions{display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem}
+    .actions{display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem;flex-wrap:wrap}
     .card.left .actions{justify-content:flex-end}
-    .outline{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:transparent;color:var(--fg);box-shadow:var(--shadow);font:500 .875rem "Noto Sans TC",sans-serif}
+    .outline{height:44px;padding:0 1rem;border:0;border-radius:.5rem;background:transparent;color:var(--fg);box-shadow:var(--shadow);font:500 .875rem "Figtree","Noto Sans TC",sans-serif}
     #confetti{position:fixed;inset:0;pointer-events:none;z-index:30}
-
     .ai-box{margin:0 0 1rem;padding:.75rem;border-radius:1rem;background:var(--bg);box-shadow:var(--shadow)}
     .ai-row{display:flex;gap:.5rem;min-width:0}
     .ai-row input{flex:1;min-width:0}
@@ -86,6 +92,9 @@
     .ai-ex button:disabled,.ai-row button:disabled,.ai-row input:disabled{opacity:.4}
     .ai-msg{margin-top:.5rem;font-size:.8rem;color:var(--muted)}
     .ai-msg.err{color:var(--danger)}
+    .howto ol{display:flex;flex-direction:column;gap:.65rem;font-size:.9rem;line-height:1.5;margin:1rem 0}
+    .howto li{display:flex;gap:.75rem}
+    .howto .n{width:1.25rem;color:var(--muted);flex-shrink:0}
     @media (max-width:920px){.layout{grid-template-columns:1fr}.app{padding:1.25rem 1rem}}
   </style>
 </head>
@@ -93,13 +102,19 @@
   <div class="app">
     <header>
       <div>
-        <div class="brand">&#x8F49;&#x4E00;&#x8F49;</div>
-        <p class="sub">&#x9999;&#x6E2F;&#x4EBA;&#x7684;&#x6C7A;&#x5B9A;&#x8F49;&#x76E4;&#x3002;</p>
+        <div class="brand" id="brand">Spin</div>
+        <p class="sub" id="tagline"></p>
+        <p class="sub" id="liveTheme" style="display:none;margin-top:.75rem"></p>
       </div>
       <div class="icon-row">
-        <button class="icon-btn" id="soundBtn" title="&#x8072;&#x97F3;">&#x8072;</button>
-        <button class="icon-btn" id="shareBtn" title="&#x8907;&#x88FD;&#x9023;&#x7D50;">&#x9023;</button>
-        <button class="icon-btn" id="fsBtn" title="&#x5168;&#x756B;&#x9762;">&#x5168;</button>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" id="langZh">&#x4E2D;</button>
+          <button type="button" id="langEn">EN</button>
+        </div>
+        <button class="icon-btn" id="helpBtn" title="How to use" aria-label="How to use"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+        <button class="icon-btn" id="soundBtn" title="Sound" aria-label="Sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg></button>
+        <button class="icon-btn" id="shareBtn" title="Share" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg></button>
+        <button class="icon-btn" id="fsBtn" title="Fullscreen" aria-label="Fullscreen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg></button>
       </div>
     </header>
     <div class="layout">
@@ -110,27 +125,27 @@
           </div>
           <canvas id="wheel" width="840" height="840"></canvas>
         </div>
-        <button class="spin" id="spinBtn">&#x8F49;&#x76E4;</button>
-        <p class="hint">&#x7A7A;&#x767D;&#x9375;&#x4EA6;&#x53EF;&#x8F49;&#x52D5; &#xB7; &#x81F3;&#x5C11;&#x5169;&#x500B;&#x9078;&#x9805;</p>
+        <button class="spin" id="spinBtn">Spin</button>
+        <p class="hint" id="spinHint"></p>
       </section>
       <aside class="panel">
         <div class="theme">
           <div>
-            <p class="kicker">&#x4E3B;&#x984C;</p>
-            <p id="themeLabel">&#x4ECA;&#x665A;&#x98DF;&#x54A9; &#xB7; 8 &#x500B;&#x9078;&#x9805;</p>
+            <p class="kicker" id="themeKicker"></p>
+            <p id="themeLabel"></p>
           </div>
           <div class="tools">
-            <button class="icon-btn" id="saveBtn" title="&#x5132;&#x5B58;&#x6B64;&#x8F49;&#x76E4;">&#x5B58;</button>
-            <button class="icon-btn" id="randBtn" title="&#x96A8;&#x6A5F;&#x4E3B;&#x984C;">&#x9AB0;</button>
-            <button class="icon-btn" id="shuffleBtn" title="&#x6D17;&#x724C;">&#x6D17;</button>
+            <button class="icon-btn" id="saveBtn" title="Save" aria-label="Save"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+            <button class="icon-btn" id="randBtn" title="Random" aria-label="Random"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg></button>
+            <button class="icon-btn" id="shuffleBtn" title="Shuffle" aria-label="Shuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h9"/></svg></button>
+            <button class="icon-btn" id="clearBtn" title="Clear" aria-label="Clear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
           </div>
         </div>
-
         <div class="ai-box">
-          <p class="kicker">AI &#x7522;&#x751F;&#x9078;&#x9805;</p>
+          <p class="kicker" id="aiKicker"></p>
           <form id="aiForm" class="ai-row">
-            <input id="aiPrompt" type="text" maxlength="80" autocomplete="off" enterkeyhint="go" placeholder="&#x8F38;&#x5165;&#x63D0;&#x793A;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x4ECA;&#x665A;&#x65FA;&#x89D2;&#x98DF;&#x751A;&#x9EBC;" aria-label="&#x7522;&#x751F;&#x9078;&#x9805;&#x7684;&#x63D0;&#x793A;" />
-            <button class="add-btn" id="aiBtn" type="submit">&#x7522;&#x751F;</button>
+            <input id="aiPrompt" type="text" maxlength="80" autocomplete="off" enterkeyhint="go" />
+            <button class="add-btn" id="aiBtn" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4 6 6"/><path d="m21 3-6.5 6.5"/><path d="M8 8 3 21l13-5"/><path d="m11 11 4 4"/></svg> <span id="aiBtnText">Generate</span></button>
           </form>
           <div class="ai-ex" id="aiExamples"></div>
           <p class="ai-msg" id="aiMsg" hidden></p>
@@ -138,18 +153,18 @@
         <div class="tabs" id="tabs"></div>
         <div class="chips" id="chips"></div>
         <div class="add">
-          <input id="newOption" type="text" maxlength="42" placeholder="&#x65B0;&#x589E;&#x9078;&#x9805;" />
-          <button class="add-btn" id="addBtn">&#x52A0;&#x5165;</button>
+          <input id="newOption" type="text" maxlength="42" />
+          <button class="add-btn" id="addBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg> <span id="addBtnText">Add</span></button>
         </div>
         <ul class="options" id="options"></ul>
         <div class="hr"></div>
-        <label class="row">&#x8F49;&#x5B8C;&#x522A;&#x9664;&#x6B64;&#x9805; <div class="switch" id="elimSwitch"><i></i></div></label>
-        <label class="row">&#x52A0;&#x6B0A;&#x63D0;&#x9AD8;&#x4E2D;&#x734E;&#x6A5F;&#x6703; <div class="switch" id="weightSwitch"><i></i></div></label>
-        <p class="hint" id="weightHint" style="display:none">&#x6578;&#x5B57;&#x8D8A;&#x5927;&#xFF0C;&#x4E2D;&#x734E;&#x6A5F;&#x6703;&#x8D8A;&#x9AD8;&#x3002;</p>
+        <label class="row"><span id="elimLabel"></span> <div class="switch" id="elimSwitch"><i></i></div></label>
+        <label class="row"><span id="weightLabel"></span> <div class="switch" id="weightSwitch"><i></i></div></label>
+        <p class="hint" id="weightHint" style="display:none;text-align:left"></p>
         <div class="hr"></div>
         <div class="hist-head">
-          <p class="kicker">&#x6700;&#x8FD1;</p>
-          <button class="link" id="clearHistory" type="button">&#x6E05;&#x7A7A;&#x8A18;&#x9304;</button>
+          <p class="kicker" id="histKicker"></p>
+          <button class="link" id="clearHistory" type="button"></button>
         </div>
         <ul class="history" id="history"></ul>
       </aside>
@@ -158,29 +173,41 @@
   <div class="modal" id="modal">
     <div class="card">
       <p class="win-emoji emoji" id="winnerEmoji">&#x2728;</p>
-      <p class="kicker">&#x8F49;&#x76E4;&#x7D50;&#x679C;</p>
+      <p class="kicker" id="winnerKicker"></p>
       <h3 id="winnerTitle">&#x2014;</h3>
-      <p class="sub">&#x5DF2;&#x62BD;&#x51FA;&#x7D50;&#x679C;&#x3002;&#x53EF;&#x518D;&#x8F49;&#x4E00;&#x6B21;&#x3002;</p>
+      <p class="sub" id="winnerDesc"></p>
       <div class="actions">
-        <button class="spin" id="againBtn" style="width:auto;padding:0 1.25rem;margin:0">&#x518D;&#x8F49;&#x4E00;&#x6B21;</button>
-        <button class="outline" id="closeModal">&#x95DC;&#x9589;</button>
+        <button class="spin" id="againBtn" style="width:auto;padding:0 1.25rem;margin:0"></button>
+        <button class="outline" id="closeModal"></button>
       </div>
     </div>
   </div>
   <div class="modal" id="saveModal">
     <div class="card left">
-      <p class="kicker">&#x81EA;&#x8A02;&#x8F49;&#x76E4;</p>
-      <h3 style="font-size:1.5rem">&#x5132;&#x5B58;&#x6B64;&#x8F49;&#x76E4;</h3>
-      <p class="sub" style="margin-bottom:1rem">&#x4E4B;&#x5F8C;&#x53EF;&#x65BC;&#x300C;&#x81EA;&#x8A02;&#x300D;&#x8F09;&#x5165;&#x3002;</p>
-      <input id="saveName" type="text" maxlength="20" placeholder="&#x8F49;&#x76E4;&#x540D;&#x7A31;" />
+      <p class="kicker" id="saveKicker"></p>
+      <h3 id="saveTitle" style="font-size:1.5rem"></h3>
+      <p class="sub" id="saveDesc" style="margin-bottom:1rem"></p>
+      <input id="saveName" type="text" maxlength="20" />
       <div class="actions">
-        <button class="outline" id="cancelSave">&#x53D6;&#x6D88;</button>
-        <button class="spin" id="confirmSave" style="width:auto;padding:0 1.25rem;margin:0">&#x5132;&#x5B58;</button>
+        <button class="outline" id="cancelSave"></button>
+        <button class="spin" id="confirmSave" style="width:auto;padding:0 1.25rem;margin:0"></button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="helpModal">
+    <div class="card left howto">
+      <p class="kicker" id="howKicker"></p>
+      <h3 id="howTitle" style="font-size:1.7rem"></h3>
+      <p class="sub" id="howDesc"></p>
+      <ol id="howSteps"></ol>
+      <p class="sub" id="howFoot"></p>
+      <div class="actions">
+        <button class="outline" id="closeHelp"></button>
       </div>
     </div>
   </div>
   <canvas id="confetti"></canvas>
-  <script src="data.js?v=5"></script>
-  <script src="app.js?v=5"></script>
+  <script src="data.js?v=8"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
