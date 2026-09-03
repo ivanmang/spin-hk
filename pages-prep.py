@@ -48,6 +48,7 @@ assembled = bool(
     and "SPIN_DATA" in data_src
     and "COPY" in app_src
     and "moveTo" in app_src
+    and "beginBrake" in app_src
 )
 
 if assembled:
@@ -75,19 +76,25 @@ for line in lines:
         '"Figtree","Noto Sans TC",sans-serif',
         '"PingFang HK","Noto Sans TC",system-ui,sans-serif',
     )
+    line = line.replace(
+        "canvas#wheel{width:100%;height:100%;display:block}",
+        "canvas#wheel{width:100%;height:100%;display:block;cursor:pointer}",
+    )
     if assembled:
         if "script src" in line:
             continue
         if body_close in line:
-            out.append(script_tag("data.js?v=16"))
-            out.append(script_tag("app.js?v=16"))
-        line = line.replace("?v=9", "?v=16")
-        line = line.replace("?v=14", "?v=16")
-        line = line.replace("?v=15", "?v=16")
+            out.append(script_tag("data.js?v=17"))
+            out.append(script_tag("app.js?v=17"))
+        line = line.replace("?v=9", "?v=17")
+        line = line.replace("?v=14", "?v=17")
+        line = line.replace("?v=15", "?v=17")
+        line = line.replace("?v=16", "?v=17")
     else:
-        line = line.replace("?v=9", "?v=16")
-        line = line.replace("?v=14", "?v=16")
-        line = line.replace("?v=15", "?v=16")
+        line = line.replace("?v=9", "?v=17")
+        line = line.replace("?v=14", "?v=17")
+        line = line.replace("?v=15", "?v=17")
+        line = line.replace("?v=16", "?v=17")
     out.append(line)
 
 Path("index.html").write_text("\n".join(out) + "\n")
